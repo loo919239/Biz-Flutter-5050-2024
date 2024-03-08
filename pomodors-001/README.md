@@ -15,4 +15,11 @@
 
 - `setting` 에서 설정한 값이 `home` 에 반영되도록 하였지만, 어플을 종료한 후 다시 시작하면 값이 초기화가 되어 버린다
 
-## Device 의 `localStorage` 에 setting 값 저장하기
+## Device 의 `localStorage` 에 `setting` 값 저장하기
+
+- `web Browser` 의 작은 데이터 저장공간인 `localStorage` 와 같은 개념의 저장공간이 `Android`, `IOS`, `WEB` 에는 준비가 되어 있다.
+- 하지만 모둔 Device 마다 저장하는 방식이 서로 달라서 이 것을 구현하려면 많은 코드가 필요로 하다.
+- `localStorage` 에 데이터를 저장, 읽기를 하기 위하여 dependency 를 가져온다.
+- 스마트 기기에서는 이 저장 장소를 `sharde_preferences` 라는 이름으로 사용하였으며, dependecy 도 이 이름으로 준비되어 있다.
+
+- 설치: `flutter pub add shared_preferences`

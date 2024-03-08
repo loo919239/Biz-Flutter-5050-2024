@@ -4,8 +4,9 @@ import 'package:settings_ui/settings_ui.dart';
 class SettingPage extends StatefulWidget {
   // required this.onChange
   // main 으로 부터 onChange 라는 props 를 반드시 받도록 선언하기
-  const SettingPage({super.key, required this.onChange});
-
+  const SettingPage(
+      {super.key, required this.onChange, required this.workTimer});
+  final int workTimer;
   // State 에서 onChange 를 사용할수 있도록 선언하기
   // onChange 라는 props 는 함수이다(Function)
   // 또한 문자열형 매개변수를 통하여 값을 전달 할수 있다.
@@ -18,6 +19,13 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
+  final workTimeController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    workTimeController.text = widget.workTimer.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,6 +38,10 @@ class _SettingPageState extends State<SettingPage> {
             SettingsTile(
               leading: const Icon(Icons.timer_outlined),
               title: TextField(
+                /// TextField 에 id(ref) 부착하기
+                ///
+                controller: workTimeController,
+
                 /// StateFull 에서 선언한 props 를 사용할때는
                 /// widget.Props 형태로 사용한다
                 /// StateFull 에서 선언한 onChange 함수를
