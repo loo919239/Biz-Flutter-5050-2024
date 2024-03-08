@@ -31,13 +31,25 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _pageIndex = 1;
-  int wantTimer = 20;
+  int workTimer = 20;
 
   void onChangeSetting(String value) {
     if (value.length > 3) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(value)));
     }
+
+    /// setting_page 의 일할시간 TextField 의 onChange event 핸들러로부터
+    /// 전달된 문자열을 정수형으로 변환하여 workTimer state 에 할당하기
+
+    // state 변수에 값을 할당하는 일반적인 방법
+    setState(() => workTimer = int.parse(value));
+
+    // state 변수에 값을 할당하기 전에 여러 연산을 수행하야 하는 경우
+    // 연산 절차 코드를 실행하여 state 변수에 값을 할당하고
+    // setState() 함수는 Blank 함수를 실행하는 방법으로 구현한다
+    workTimer = int.parse(value);
+    setState(() => {});
   }
 
   /// flutter dart에서 변수를 선언할때 final, const 키워드가 있으면
@@ -68,7 +80,9 @@ class _MainPageState extends State<MainPage> {
           scrollDirection: Axis.horizontal,
           onPageChanged: (value) => setState(() => _pageIndex = value),
           children: [
-            const HomePage(),
+            HomePage(
+              workTimer: workTimer,
+            ),
             const DashPage(),
             SettingPage(
               onChange: onChangeSetting,
